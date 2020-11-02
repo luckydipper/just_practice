@@ -39,8 +39,6 @@ namespace kimHeeSung {
 }
 
 
-
-
 int main() {
 	std::cout << 1;
 	string vari = kimHeeSung::helloWord();
