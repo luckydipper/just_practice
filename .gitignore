@@ -1,2 +1,7 @@
 *.vs
 *.vsc
+*.tlog
+*.log
+*.obj
+*.ilk
+*.cache
