@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bit_opperator.c">
+    <ClCompile Include="repeat.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
