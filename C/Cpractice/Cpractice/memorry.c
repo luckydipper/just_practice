@@ -6,7 +6,7 @@
 //void free(void* ptr);
 //heap에서 할당 받은 메모리 공간을 다시 운영체제로 반환해주는 함수
 //안 해주면 메모리 부족 즉, 메모리 누수 (memory leak)
-//void* calloc(size_t nmemb, size_t size);
+//void* calloc(size_t nmemb, size_t size);contiguous memory allocation
 //메모리의 모든 비트를 0으로 초기화.
 //첫 번째 인수는 메모리 블록의 개수를 나타냄.
 //두 번째 인수는 각 블록의 바이트 수를 나타냄.
