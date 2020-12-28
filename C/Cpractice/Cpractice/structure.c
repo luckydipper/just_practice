@@ -51,24 +51,66 @@ struct monster
 int about_structure()
 {
 	printf("구조체의 크기는 각 맴버변수(attribute)의 합일 수도 아닐 수 도 있음.");
-	printf("구조체의 속도를 위해 byte padding을 넣기 때문이다.")
-}
+	printf("구조체의 속도를 위해 byte padding을 넣기 때문이다.");
+};
 
 int uninons()
 {//공용체 union is simular with structure 
 //모든 멤버 변수가 하나의 메모리 공간을 공유
-	union MyUnion
-	{
+	puts("--- Start UNION example ----\n");
+	typedef union
+	{// union의 method는 자료형이 달라도 같은 메모리 공간을 공유함.
+		unsigned char first;// 1 byte, 양수로 2byte임
+		unsigned short second;// 2byte
+		unsigned int theird;//4byte
+	}same_data;
+	
+	same_data date;
+	date.theird = 0x12345678;// thired 에 넣어야지 잘 작동함. first에 넣으면 overflow일으킴.
+	printf("10진수 value is %d\n", date.first);
+	printf("1byte -> 8bit, 4bit+4bit, 16진수 + 16진수\n");
+	printf("first char 1byte data %x\n and its size is %d\n\n", date.first, (int)sizeof(date.first));
+	printf("second short 2byte data %x\n and its size is %d\n\n", date.second,(int)sizeof(date.second));
+	printf("third int 4byte data %x\n and its size is %d\n\n", date.theird, (int)sizeof(date.theird));
 
-	};
+	puts("--- END UNION example ----\n");
+	return 0;
 }
+
+
 
 int enums()
-{//열거채, 새로운 타입을 선언하면서, 동시에 해당 타입이 가질 수 있는 정수형 상숫값도 같이 명시할 수 있는 타입
+{//열거채(목록, enumeration), 새로운 타입을 선언함. 정수형 상수에 이름을 붙혀서 이해하기 쉽게함.
+ //복잡한 값들을 숫자로 단순하게 치환해서 표현
+ //이름은 snake 표기 열거형 값은 대문자.
 
+	/*ex) const int value1 = 1;
+		  const int value2 = 2;
+		  const int value3 = 3;*/
+	
+	puts("--- enum start ---");
+	enum day_of_week
+	{
+		MON, // 초기 값 설정 안하면 자동으로 0, 나머지는 1씩 커져서 저장됨.
+		TUS,
+		WEN,
+		THI,
+		FRI,
+		SAT,
+		SUN
+	};
+
+	enum day_of_week week;
+	week = SAT;
+	printf("SAT value is %d\n", week);
+	printf("WEN value is %d\n", WEN);
+	puts("--- enum end ---");
+	return 0;
 }
 int main()
-{
+{	
+	enums();
+	uninons();
 	//Us();
 	//extra();
 	struct monster mushrom; 

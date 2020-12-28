@@ -19,7 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="structure.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="my.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="my.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
