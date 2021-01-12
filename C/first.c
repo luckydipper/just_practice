@@ -2,5 +2,5 @@
 #define TEXT "hello world"
 
 int main(){
-    printf("hello world")
+    printf("hello world");
 }

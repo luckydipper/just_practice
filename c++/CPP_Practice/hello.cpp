@@ -5,6 +5,7 @@ int main()
     int a;
     cout << "hello world" << endl;
     cin >> a;
+    cout << "What you have give us is " << a << endl;
 }
 //shift가 alt 단축키이네
 //control + shift + p 

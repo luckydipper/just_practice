@@ -1,0 +1,12 @@
+#ifndef QT_CREATOR_GLOBAL_H
+#define QT_CREATOR_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(QT_CREATOR_LIBRARY)
+#  define QT_CREATORSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define QT_CREATORSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // QT_CREATOR_GLOBAL_H
