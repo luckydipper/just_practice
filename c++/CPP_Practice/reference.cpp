@@ -1,10 +1,16 @@
 #include <iostream>
 
+
+// I think 아마 빠르게 동작하게 하고자 한다면, 직접 값을 복사하지 않고, 
+// 함수에서 reference로만 주고 받으면 빠를 것 같다!
+
+
 //reference는 cpp에서 포인터가 야기하는 많은 문제점들을 보완하고자 나왔다.
 //reference는 제약이 조금 있다. refernce를 쓸 수 있다면 reference 쓰고, 그럴 수 없다면 pointer를 써야한다.
 
 namespace inable_reference
 {
+    //reference의 reference &&는 안됨. 별명의 별명임.
     int constant_reference()
     {
         int not_ref_const4 = 4;
@@ -30,6 +36,49 @@ namespace inable_reference
         
         std::cout << *(prt_2_arr[1] + 6) << std::endl;
         return 0;
+    }
+
+
+    int &change_2_5(int &refers)
+    {
+        int new_val = 5;
+        int &new_ref = new_val;
+        refers = 5;
+        return refers; //이렇게 되면 ok
+        //but return new_ref는 안됨. new_val은 return과 동시에 사라지기 때문에.
+    }
+
+
+    int return_val()
+    {
+        int a = 5;
+        return a;
+    }
+
+    int refer_return()
+    {//reference를 return하는 함수에선, 지역변수를 return하면 오류가 남.dangling
+    //parameter로 받은 reference를 return 하는 것은 괜찮다.
+    //복사하기 힘든 구조체에서 필요부분만 reference로 가져올 수 있다.
+
+        int num = 1;
+
+        int &num_ref = num;
+        std::cout << "First is " << num << std::endl;
+        change_2_5(num_ref);
+        std::cout << "After changed " << num << std::endl;
+
+
+    //그리고 reference는 함수의 reference가 아닌 
+    //return 값을 받을 수 없다. 왜냐면, 함수가 끝나면 stack이 비워지기 때문!
+        //int &d = return_val(); 이건 상수 때문이 아니다.!rvariable l variable
+        const int &c = return_val();
+        //상수 레퍼런스로 리턴값을 받게 되면 해당 리턴값의 생명이 연장됩니다
+
+    
+        return 0; // num_ref를 return 하면 dangling 오류가 난다.
+    
+    //함수 상수 retrun -> reference로 못 받음. 상수로 받으면 가능
+    //함수 reference return  -> int같은 일반 type으로 받을 수 있음. <복사됨>
     }
 }
 
@@ -61,19 +110,24 @@ namespace ptr
 }
 
 namespace reference
-{//포인터 말고, c++에서 변수를 가르키는 또 다른 방법 참조자
-//참조자를 사용하게 되면 불필요한 & 와 * 가 필요 없기 때문에 코드를 훨씬 간결하게 나타낼 수 있다.
+{//포인터 말고, 특별한 경우가 아니면, 메모리를 갖지 않음!! c++에서 변수를 가르키는 또 다른 방법 참조자.
+    //참조자를 사용하게 되면 불필요한 & 와 * 가 필요 없기 때문에 코드를 훨씬 간결하게 나타낼 수 있다.
     //포인터와 달리, 생성과 동시에 formating 해줘야한다.
     //레퍼런스가 한 번 별명이 되면 절대로 다른 이의 별명이 될 수 없다.
     //메모리 상에 존재하지 않을 수 도 있다. 왜냐, another_a 가 쓰이는 자리는 모두 a 로 바꿔치기
+
+    //래퍼런스 배열은 안됨. array of reference
+    //배열 래퍼런스는 됨. reference to array
     int refere()
     {
         int a = 3;
-        int* a_ptr = &a;
-        int& another_a = a;
+        int *a_ptr = &a;
+        int &another_a = a;
         //a의 또 다른 이름을 지정할 때 이용함.
-        int*& another_a_ptr = a_ptr; // &a는 안되는데?
-        std::cout << "reference(참조자) " << another_a << std::endl;
+        int* &another_a_ptr = a_ptr; // &a는 안되는데? 상수니깐 안 되지!!
+
+        //pointer to reference
+        std::cout << "reference(참조자) " << another_a_ptr << std::endl;
     }
 
 }
@@ -123,5 +177,6 @@ int main()
     array::check_array_pointer();
 
     inable_reference::array_referenc();
+    inable_reference::refer_return();
     std::cout << "--- main end ---" << std::endl;
 }
